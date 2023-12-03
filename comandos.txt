@@ -1,0 +1,9 @@
+Cuando quieran actualizar algo, apenas lo hayan terminado hacen esto para que lo tengamos todos:
+
+paso 1: *escribir en bash*
+git add .
+
+paso 2: text: donde escribes lo que quieres decir que hiciste
+git commit -m "Text"
+
+paso 3: presionar ruedita de abajo de actualizar
