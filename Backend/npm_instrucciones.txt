@@ -1,0 +1,7 @@
+npm i typescript -D
+npm i read-excel-file
+npm i express
+npm i @types/express -D
+npm install nodemon -D
+npm i ts-node -D
+npm install mysql2

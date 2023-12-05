@@ -1,6 +1,8 @@
-let mensaje: string = "Hola mundo"
-  mensaje = "perro"
+import { App } from './app';
 
-console.log(mensaje)
+async function main() {
+  const app = new App(3000);
+  await app.listen();
+}
 
-mensaje = "chao mundo"
+main();
