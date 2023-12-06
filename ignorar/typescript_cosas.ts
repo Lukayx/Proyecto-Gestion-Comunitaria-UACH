@@ -42,6 +42,27 @@ function funcionPiola(config: any) {
   return config;
 }
 
+function parseFecha(fechaStr: string): Date | null {
+  // Expresión regular para MM/DD/YYYY
+  const formatoMMDDYYYY = /^\d{2}\/\d{2}\/\d{4}$/;
+
+  if (formatoMMDDYYYY.test(fechaStr)) {
+    // Si está en formato MM/DD/YYYY, transformarlo a YYYY/MM/DD
+    const [mes, dia, anio] = fechaStr.split('/');
+    const nuevaFechaStr = `${anio}-${mes}-${dia}`;
+    return new Date(nuevaFechaStr);
+  }
+
+  // Intentar parsear la fecha original
+  const fechaOriginal = new Date(fechaStr);
+
+  // Si el parseo fue exitoso, devolver la fecha original
+  if (!isNaN(fechaOriginal.getTime())) {
+    return fechaOriginal;
+  }
+  return null;
+}
+
 let animales: string[] = ['perro', 'gato', 'agustin'];
 let nums: number[] = [1, 3, 5];
 let checks: boolean[] = [];
@@ -102,3 +123,10 @@ const objeto: Persona = {
 objeto.nombre = 'hola mundo';
 
 const arr: Persona[] = [];
+
+const fecha = '12/5/2023';
+let fechaa: Date | null = parseFecha(fecha);
+if(fechaa != null){
+  const a:string = fechaa.toISOString().split('T')[0];
+  console.log(a);
+}
