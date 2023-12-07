@@ -14,5 +14,3 @@ CREATE TABLE organizaciones (
   clasificacion VARCHAR(30) NOT NULL,  
   estado VARCHAR(10) NOT NULL 
 );
-
-DESCRIBE organizaciones;  
