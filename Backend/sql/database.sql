@@ -12,5 +12,5 @@ CREATE TABLE organizaciones (
   fechaConceso DATE,  -- Guardando como VARCHAR por ahora
   fechaRecepcion DATE, -- Guardando como VARCHAR por ahora
   clasificacion VARCHAR(30) NOT NULL,  
-  estado VARCHAR(10) NOT NULL 
+  estado VARCHAR(10) NOT NULL
 );

@@ -3,7 +3,7 @@ const router = Router();
 
 import { createOrganization } from '../Controllers/fileController'
 
-router.route('/perro')
+router.route('/organizaciones')
   .get(createOrganization);
 
 export default router;
