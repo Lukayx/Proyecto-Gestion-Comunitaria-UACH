@@ -60,15 +60,19 @@ const Subirexcel : FunctionComponent = () => {
 
     console.log(values);
 
-    await sleep(2000);
+    await sleep(1000);
     for (let index = 0; index < values.length; index++) {
       const element = values[index];
       Swal.update({
         html: `Agregando organización ${element.nombreOrg}.....`,
       });
 
-      await sleep(1000);
+      await sleep(500);
     }
+
+    const jsonValues = JSON.stringify(values);
+    console.log(jsonValues);
+
     Swal.update({
       html: `COMPLETADO.`,
     });
