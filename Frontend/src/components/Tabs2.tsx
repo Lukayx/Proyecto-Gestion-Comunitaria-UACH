@@ -12,7 +12,7 @@ const TabsPage = () => {
     <div className="bg-white rounded-lg mx-4 p-4">
 
       <br />
- 
+
       {/* Tabs Component */}
       <TabsComponent items={items} />
     </div>
