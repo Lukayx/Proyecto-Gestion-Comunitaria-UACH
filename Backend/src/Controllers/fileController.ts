@@ -8,26 +8,20 @@ import fs from 'fs';
 const storage = multer.memoryStorage();
 const upload = multer({ storage: storage });
 
-enum columnas {
-  numOrg,
-  nombreOrg,
-  rut,
-  origen,
-  comuna,
-  region,
-  direccion,
-  tipo,
-  fechaConceso,
-  fechaRecepcion,
-  clasificacion,
-  estado,
-}
-
 export async function createOrganization(req: Request, res: Response) {
   // try {
-    const dataFile = req.body;
-    const organizaciones = JSON.parse(dataFile);
-    console.log(organizaciones);
+    try {
+      // const organizaciones = 'a';
+      const organizaciones = req.body;
+      console.log(organizaciones);
+  
+      // Realiza cualquier procesamiento adicional necesario con los datos
+  
+      res.status(200).json({ mensaje: 'Solicitud POST recibida correctamente' });
+    } catch (error) {
+      console.error('Error al procesar la solicitud:', error);
+      res.status(500).json({ mensaje: 'Error en el servidor' });
+    }
 
   //   upload.single('file')(req, res, async function (err: any) {
   //     if (err) {

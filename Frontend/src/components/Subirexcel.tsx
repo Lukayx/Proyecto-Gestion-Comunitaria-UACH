@@ -12,7 +12,7 @@ const Subirexcel : FunctionComponent = () => {
     input.onchange = onReadExcel;
     input.click();
   };
-
+  
   const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
   const onReadExcel = async (event) => {
@@ -60,26 +60,38 @@ const Subirexcel : FunctionComponent = () => {
 
     console.log(values);
 
-    await sleep(1000);
+    await sleep(2000);
     for (let index = 0; index < values.length; index++) {
       const element = values[index];
       Swal.update({
         html: `Agregando organización ${element.nombreOrg}.....`,
       });
 
-      await sleep(500);
+      await sleep(1000);
     }
-
-    const jsonValues = JSON.stringify(values);
-    console.log(jsonValues);
-
     Swal.update({
       html: `COMPLETADO.`,
     });
     await sleep(1000);
     Swal.close();
   };
-
+  try {
+    const respuesta = await fetch('http://localhost:3007/organizaciones', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        // Agrega cualquier otra cabecera que necesites
+      },
+      body: JSON.stringify(values), // Convierte los datos a formato JSON
+    });
+    console.log('perrito');
+    if (!respuesta.ok) {
+      console.error('Error en la solicitud POST');
+    }
+  } catch (error) {
+    // Maneja cualquier error durante la solicitud
+    console.error('Error durante la solicitud:', error);
+  }
   return (
     <div>
       <button type="button" onClick={onMakeFile} >
