@@ -8,8 +8,11 @@ const storage = multer.memoryStorage();
 const upload = multer({ storage: storage });
 
 export async function createOrganization(req: Request, res: Response) {
-  console.log("PERRRRO");
-  const conn = await connect();
-  const nombreOrganizacion = await conn.query('SELECT * FROM organizaciones');
-  res.json(nombreOrganizacion);
+  try {
+    const conn = await connect();
+    const nombreOrganizacion = await conn.query('SELECT * FROM organizaciones');
+    res.json(nombreOrganizacion);
+  } catch (error) {
+    console.log('No se pudo contectar a la base de datos');
+  }
 }
