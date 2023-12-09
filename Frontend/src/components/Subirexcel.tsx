@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useState } from 'react';
+import { FunctionComponent } from 'react';
 import readXlsxFile from 'read-excel-file';
 import Swal from 'sweetalert2';
 

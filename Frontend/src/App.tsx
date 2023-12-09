@@ -1,21 +1,32 @@
-//import { useState } from "react";
-//import reactLogo from './assets/react.svg'
-//import viteLogo from '/vite.svg'
+import { useState } from "react";
 import "./App.css";
 import Navbar from "./components/Navbar";
-import TabsPage from "./components/Tabs2"
+import TabsPage from "./components/Tabs";
+import Login from "./components/Login";
 
 function App() {
+  const [authenticated, setAuthenticated] = useState(false);
+
+  const handleLogin = () => {
+    setAuthenticated(true);
+  };
 
   return (
     <>
       <header>
-        <Navbar></Navbar>
+        <Navbar />
       </header>
-      <h1>
-        <TabsPage />
-      </h1>
       
+      {!authenticated ? (
+        <Login onLogin={handleLogin} />
+      ) : (
+        <>
+          <h1>
+            <TabsPage />
+          </h1>
+          {/* Otros componentes que deseas mostrar después de la autenticación */}
+        </>
+      )}
     </>
   );
 }
