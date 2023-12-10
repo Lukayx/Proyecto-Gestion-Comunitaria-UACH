@@ -1,9 +1,8 @@
-import { FunctionComponent, useState } from 'react';
+import { FunctionComponent } from 'react';
 import readXlsxFile from 'read-excel-file';
 import Swal from 'sweetalert2';
 
 const Subirexcel : FunctionComponent = () => {  
-  const [organizaciones, setOrganizaciones] = useState([]);
 
   const onMakeFile = () => {
     const input = document.createElement("input");
@@ -91,12 +90,11 @@ const Subirexcel : FunctionComponent = () => {
     await sleep(1000);
     Swal.close();
 
-    console.log(organizaciones);
   };
   
   return (
     <div>
-      <button type="button" onClick={onMakeFile} >
+      <button className='active:scale-[.98] active:duration-75 transition-all hover:scale-[1.01] ease-in-out py-3 rounded-xl bg-emerald-600 text-white text-lg font-bold' type="button" onClick={onMakeFile} >
         Subir excel
       </button>
     </div>

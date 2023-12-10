@@ -49,7 +49,7 @@ export class Vecino {
         //this.carnet !== null &&
         //this.firma !== null &&
         this.observaciones !== null &&
-        this.perteneceAJuntaTerritorial !== null
+        this.perteneceAJuntaTerritorial !== null //Lo más importante
       );
     }
   }
