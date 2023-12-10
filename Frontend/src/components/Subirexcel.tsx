@@ -3,6 +3,7 @@ import readXlsxFile from 'read-excel-file';
 import Swal from 'sweetalert2';
 
 const Subirexcel : FunctionComponent = () => {  
+
   const onMakeFile = () => {
     const input = document.createElement("input");
     input.type = "file";
@@ -35,7 +36,7 @@ const Subirexcel : FunctionComponent = () => {
 
     const excel = files[0];
     const rows = await readXlsxFile(excel);
-    await rows.shift();
+    rows.shift();
     const values = rows.map((element) => {
       return {
         numOrg: element[0],
@@ -60,13 +61,13 @@ const Subirexcel : FunctionComponent = () => {
       },
       body: JSON.stringify(values),
     })
-      .then(response => response.json())
-      .then(data => {
-        console.log(data); // Aquí puedes manejar la respuesta del servidor
-      })
-      .catch(error => {
-        console.error('Error al realizar la solicitud:', error);
-      });
+    .then(response => response.json())
+    .then(data => {
+      console.log(data); // Aquí puedes manejar la respuesta del servidor
+    })
+    .catch(error => {
+      console.error('Error al realizar la solicitud:', error);
+    });
 
     Swal.update({
       html: `Se han encontrado un total de ${values.length} filas..... SE INGRESARÁN A BASE DE DATOS, NO RECARGUE LA PÁGINA.`,
@@ -88,11 +89,12 @@ const Subirexcel : FunctionComponent = () => {
     });
     await sleep(1000);
     Swal.close();
+
   };
   
   return (
     <div>
-      <button type="button" onClick={onMakeFile} >
+      <button className='active:scale-[.98] active:duration-75 transition-all hover:scale-[1.01] ease-in-out py-3 rounded-xl bg-emerald-600 text-white text-lg font-bold' type="button" onClick={onMakeFile} >
         Subir excel
       </button>
     </div>

@@ -17,13 +17,21 @@ CREATE TABLE organizaciones (
 
 -- CREATE TABLE vecinos (
 --   numero
+<<<<<<< HEAD
+--   nombre 
+=======
 --   nombre
+>>>>>>> 71b36165a3da12f994a5022fda3d9085fb79678a
 --   edad
 --   estadoCivil
 --   fechaIngreso
 --   profesion
 --   domicilio
 --   carnet
+<<<<<<< HEAD
+--   observaciones TEXT
+=======
 --   observaciones TEXT,
+>>>>>>> 71b36165a3da12f994a5022fda3d9085fb79678a
 --   vecino
 -- );
