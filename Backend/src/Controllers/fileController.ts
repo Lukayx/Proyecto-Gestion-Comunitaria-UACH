@@ -2,7 +2,7 @@ import { Request, Response } from 'express';
 import readExcelFile, { Row } from 'read-excel-file/node';
 import multer from 'multer';
 import { connect } from '../database';
-import { FileData } from '../Models/fileModel';
+import { Organizacion } from '../Models/Organizacion';
 import fs from 'fs';
 
 const storage = multer.memoryStorage();
@@ -10,18 +10,17 @@ const upload = multer({ storage: storage });
 
 export async function createOrganization(req: Request, res: Response) {
   // try {
-    try {
-      // const organizaciones = 'a';
-      const organizaciones = req.body;
-      console.log(organizaciones);
-  
-      // Realiza cualquier procesamiento adicional necesario con los datos
-  
-      res.status(200).json({ mensaje: 'Solicitud POST recibida correctamente' });
-    } catch (error) {
-      console.error('Error al procesar la solicitud:', error);
-      res.status(500).json({ mensaje: 'Error en el servidor' });
-    }
+  try {
+    let perrito: Organizacion;
+    const organizaciones = req.body;
+    
+
+    console.log(organizaciones);
+    res.status(200).json({ mensaje: 'Solicitud POST recibida correctamente'});
+  } catch (error) {
+    console.error('Error al procesar la solicitud:', error);
+    res.status(500).json({ mensaje: 'Error en el servidor' });
+  }
 
   //   upload.single('file')(req, res, async function (err: any) {
   //     if (err) {
@@ -56,16 +55,24 @@ export async function createOrganization(req: Request, res: Response) {
   // }
 }
 
+export async function verOrganization(req: Request, res: Response) {
+  
+}
+
 async function procesarFilas(rows: Row[]) {
   try {
-    let texto= '';
+    let texto = '';
     let valor: string | number | boolean | Object;
     // const conn = await connect();
     for (let i = 0; i < rows.length; i++) {
       const row = rows[i];
       for (let j = 0; j < row.length; j++) {
         const cell = row[j];
-        if (typeof cell === 'string' || typeof cell === 'number' || typeof cell === 'boolean') {
+        if (
+          typeof cell === 'string' ||
+          typeof cell === 'number' ||
+          typeof cell === 'boolean'
+        ) {
           valor = cell.valueOf();
         } else if (cell instanceof Date) {
           valor = cell.toLocaleDateString(); // Formatear la fecha
@@ -74,8 +81,6 @@ async function procesarFilas(rows: Row[]) {
           break;
         }
         texto += valor + '    ';
-        
-        
       }
       console.log(texto + '\n');
       texto = '';

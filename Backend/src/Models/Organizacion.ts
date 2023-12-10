@@ -1,5 +1,3 @@
-import moment from 'moment';
-
 export class Organizacion {
   private numOrg: number;
   public nombreOrg: string;
@@ -61,5 +59,5 @@ export class Organizacion {
       return fechaOriginal;
     }
     return null;
-  }
+  }  
 }

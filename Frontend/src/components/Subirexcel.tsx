@@ -53,6 +53,20 @@ const Subirexcel : FunctionComponent = () => {
         estado: element[11],
       };
     });
+    fetch('http://localhost:3007/organizaciones', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(values),
+    })
+      .then(response => response.json())
+      .then(data => {
+        console.log(data); // Aquí puedes manejar la respuesta del servidor
+      })
+      .catch(error => {
+        console.error('Error al realizar la solicitud:', error);
+      });
 
     Swal.update({
       html: `Se han encontrado un total de ${values.length} filas..... SE INGRESARÁN A BASE DE DATOS, NO RECARGUE LA PÁGINA.`,
@@ -75,23 +89,7 @@ const Subirexcel : FunctionComponent = () => {
     await sleep(1000);
     Swal.close();
   };
-  try {
-    const respuesta = await fetch('http://localhost:3007/organizaciones', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        // Agrega cualquier otra cabecera que necesites
-      },
-      body: JSON.stringify(values), // Convierte los datos a formato JSON
-    });
-    console.log('perrito');
-    if (!respuesta.ok) {
-      console.error('Error en la solicitud POST');
-    }
-  } catch (error) {
-    // Maneja cualquier error durante la solicitud
-    console.error('Error durante la solicitud:', error);
-  }
+  
   return (
     <div>
       <button type="button" onClick={onMakeFile} >

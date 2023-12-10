@@ -1,12 +1,12 @@
 import { Router } from 'express';
 const router = Router();
 
-import { createOrganization } from '../Controllers/fileController'
+import { createOrganization, verOrganization } from '../Controllers/fileController'
 
 router.route('/organizaciones/')
   .post(createOrganization);
 
-// router.route('/organizaciones/')
-//   .get();
+router.route('/organizaciones/')
+  .get(verOrganization);
 
 export default router;
