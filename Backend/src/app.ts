@@ -1,6 +1,6 @@
 import express, { Application } from 'express';
 import IndexRoutes from './Routes/index.routes';
-import FileRoutes from './Routes/file.routes';
+import FileRoutes from './Routes/organization.routes';
 const cors = require('cors');
 
 export class App {

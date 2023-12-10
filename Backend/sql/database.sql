@@ -9,8 +9,21 @@ CREATE TABLE organizaciones (
   region VARCHAR(30) NOT NULL,
   direccion VARCHAR(40) NOT NULL,
   tipo VARCHAR(25) NOT NULL,  
-  fechaConceso DATE NOT NULL,  -- Guardando como VARCHAR por ahora
-  fechaRecepcion DATE NOT NULL, -- Guardando como VARCHAR por ahora
+  fechaConceso DATE NOT NULL,  
+  fechaRecepcion DATE NOT NULL, 
   clasificacion VARCHAR(30) NOT NULL,  
   estado VARCHAR(20) NOT NULL
+);
+
+CREATE TABLE vecinos (
+  numero
+  nombre 
+  edad
+  estadoCivil
+  fechaIngreso
+  profesion
+  domicilio
+  carnet
+  observaciones TEXT
+  vecino
 );

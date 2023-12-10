@@ -2,8 +2,7 @@ import { FunctionComponent } from 'react';
 import readXlsxFile from 'read-excel-file';
 import Swal from 'sweetalert2';
 
-const Subirexcel : FunctionComponent = () => {
-  
+const Subirexcel : FunctionComponent = () => {  
   const onMakeFile = () => {
     const input = document.createElement("input");
     input.type = "file";
@@ -39,7 +38,7 @@ const Subirexcel : FunctionComponent = () => {
     await rows.shift();
     const values = rows.map((element) => {
       return {
-        numeroOrg: element[0],
+        numOrg: element[0],
         nombreOrg: element[1],
         rut: element[2],
         origen: element[3],
