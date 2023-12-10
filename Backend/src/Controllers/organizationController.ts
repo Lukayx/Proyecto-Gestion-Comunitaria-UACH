@@ -1,16 +1,16 @@
 import { Request, Response } from 'express';
+import { Connection } from 'mysql2/promise';
 import { connect } from '../database';
 import { Organizacion } from '../Models/Organizacion';
 
-export async function createOrganization(req: Request, res: Response) {
+export async function uploadOrganizations(req: Request, res: Response) {
   try {
     const organizaciones = req.body;
     // Intenta conectar a la base de datos
-    let conn;
+    let conn: Connection;
     try {
       conn = await connect();
     } catch (error) {
-      console.log('No se pudo conectar a la base de datos');
       res.status(500).json({ mensaje: 'Error en el servidor' });
       return; // Detiene la ejecución si no se pudo conectar a la base de datos
     }
@@ -20,7 +20,7 @@ export async function createOrganization(req: Request, res: Response) {
         organizacion.numeroOrg,
         organizacion.nombreOrg,
         organizacion.rut,
-        organizacion.origen,
+        organizacion.origen,  
         organizacion.comuna,
         organizacion.region,
         organizacion.direccion,
@@ -40,7 +40,7 @@ export async function createOrganization(req: Request, res: Response) {
           );
           // Verificar si se encontraron filas
           if (Array.isArray(rows) && rows.length === 0) {
-            // No existe, entonces se puede agregar
+            // Si no existe, entonces se puede agregar
             await conn.execute(
               `INSERT INTO organizaciones (numOrg, nombreOrg, rut, origen, comuna, region, direccion, tipo, fechaConceso, fechaRecepcion, clasificacion, estado) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
               [
@@ -59,20 +59,16 @@ export async function createOrganization(req: Request, res: Response) {
               ]
             );
           } else {
-            console.log(
-              'El numOrg:',
-              elemento.numOrg,
-              'ya existe en la tabla.'
-            );
+            console.log('El numOrg:', elemento.numOrg, 'ya existe en la tabla.');
           }
         } catch (error) {
           console.error('Error al intentar agregar la organización:', error);
           res.status(500).json({ mensaje: 'Error en el servidor' });
         }
+      } else {
+        console.log('Hay un elemento null en la fila');
       }
     }
-    // Cierra la conexión a la base de datos
-    await conn.end();
     res.status(200).json({ mensaje: 'Solicitud POST recibida correctamente' });
   } catch (error) {
     console.error('Error al procesar la solicitud:', error);
@@ -80,8 +76,8 @@ export async function createOrganization(req: Request, res: Response) {
   }
 }
 
-export async function verOrganization(req: Request, res: Response) {
-  let conn;
+export async function getNameOrganizations(req: Request, res: Response) {
+  let conn: Connection;
   try {
     conn = await connect(); // Conéctate a la base de datos
   } catch (error) {
@@ -89,11 +85,9 @@ export async function verOrganization(req: Request, res: Response) {
     res.status(500).json({ mensaje: 'Error en el servidor' });
     return; // Detiene la ejecución si no se pudo conectar a la base de datos
   }
+  
   // Realiza una consulta SELECT para obtener los datos
-  const [rows] = await conn.execute('SELECT * FROM organizaciones');
-
-  // Imprime los resultados
-  console.log('Contenido de la base de datos:');
-  res.json(rows);
-  await conn.end();
+  const [rows] = await conn.execute('SELECT nombreOrg FROM organizaciones');
+  res.status(200).json(rows);
+  console.log(rows);
 }
