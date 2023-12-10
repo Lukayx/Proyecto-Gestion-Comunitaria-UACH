@@ -1,8 +1,10 @@
-import { FunctionComponent } from 'react';
+import { FunctionComponent, useState } from 'react';
 import readXlsxFile from 'read-excel-file';
 import Swal from 'sweetalert2';
 
 const Subirexcel : FunctionComponent = () => {  
+  const [organizaciones, setOrganizaciones] = useState([]);
+
   const onMakeFile = () => {
     const input = document.createElement("input");
     input.type = "file";
@@ -88,6 +90,8 @@ const Subirexcel : FunctionComponent = () => {
     });
     await sleep(1000);
     Swal.close();
+
+    console.log(organizaciones);
   };
   
   return (

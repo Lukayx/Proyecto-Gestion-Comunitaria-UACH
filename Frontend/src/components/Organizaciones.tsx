@@ -1,20 +1,19 @@
 import React, { useState, useEffect } from 'react';
+import { FunctionComponent } from "react";
 
-const Organizaciones = () => {
+const Organizaciones: FunctionComponent = () => {
   const [organizaciones, setOrganizaciones] = useState([]);
 
   useEffect(() => {
-    // Lógica para obtener las organizaciones desde el backend
     fetchOrganizaciones();
   }, []);
 
-  const fetchOrganizaciones = async () => {
+  const fetchOrganizaciones = () => {
     fetch('http://localhost:3007/api/organizaciones', {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: 'Necesito los nombres de las organizaciones.',
       })
       .then(response => response.json())
       .then(data => {
@@ -28,11 +27,8 @@ const Organizaciones = () => {
 
   return (
     <div>
-      <ul>
-        {organizaciones.map((org) => (
-          <li key={org.id}>{org.nombreOrg}</li>
-        ))}
-      </ul>
+      <h1>Organizaciones</h1>
+      <h1>{organizaciones}</h1>
     </div>
   );
 };

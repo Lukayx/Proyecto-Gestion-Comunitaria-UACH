@@ -39,9 +39,6 @@ const items = [
         <div>
           <ExcelUploader/>
         </div>
-        <div>
-          <Organizaciones/>
-        </div>
       </div>
     ),
   },

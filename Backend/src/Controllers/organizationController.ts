@@ -72,7 +72,7 @@ export async function uploadOrganizations(req: Request, res: Response) {
     res.status(200).json({ mensaje: 'Solicitud POST recibida correctamente' });
   } catch (error) {
     console.error('Error al procesar la solicitud:', error);
-    res.status(500).json({ mensaje: 'Error en el servidor' });
+    res.status(500).json({ mensaje: 'Error en el servidor al hacer POST ' });
   }
 }
 
@@ -82,12 +82,12 @@ export async function getNameOrganizations(req: Request, res: Response) {
     conn = await connect(); // Conéctate a la base de datos
   } catch (error) {
     console.log('No se pudo conectar a la base de datos');
-    res.status(500).json({ mensaje: 'Error en el servidor' });
+    res.status(500).json({ mensaje: 'Error en el servidor al hacer GET' });
     return; // Detiene la ejecución si no se pudo conectar a la base de datos
   }
   
   // Realiza una consulta SELECT para obtener los datos
   const [rows] = await conn.execute('SELECT nombreOrg FROM organizaciones');
-  res.status(200).json(rows);
-  console.log(rows);
+  return res.status(200).json({ ok: 'Success', data: rows});
+
 }
