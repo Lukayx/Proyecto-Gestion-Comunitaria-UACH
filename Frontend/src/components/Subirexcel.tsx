@@ -36,7 +36,7 @@ const Subirexcel : FunctionComponent = () => {
 
     const excel = files[0];
     const rows = await readXlsxFile(excel);
-    await rows.shift();
+    rows.shift();
     const values = rows.map((element) => {
       return {
         numeroOrg: element[0],
@@ -61,13 +61,13 @@ const Subirexcel : FunctionComponent = () => {
       },
       body: JSON.stringify(values),
     })
-      .then(response => response.json())
-      .then(data => {
-        console.log(data); // Aquí puedes manejar la respuesta del servidor
-      })
-      .catch(error => {
-        console.error('Error al realizar la solicitud:', error);
-      });
+    .then(response => response.json())
+    .then(data => {
+      console.log(data); // Aquí puedes manejar la respuesta del servidor
+    })
+    .catch(error => {
+      console.error('Error al realizar la solicitud:', error);
+    });
 
     Swal.update({
       html: `Se han encontrado un total de ${values.length} filas..... SE INGRESARÁN A BASE DE DATOS, NO RECARGUE LA PÁGINA.`,

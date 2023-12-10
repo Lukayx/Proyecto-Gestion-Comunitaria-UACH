@@ -5,6 +5,7 @@ import { FaPeopleGroup } from "react-icons/fa6";
 import { MdForum } from "react-icons/md";
 import Novedades from "./Novedades"
 import ExcelUploader from "./Subirexcel"
+import Organizaciones from "./Organizaciones";
 
 const TabsPage = () => {
   return (
@@ -35,7 +36,12 @@ const items = [
 		icon: <FaPeopleRoof />,
     content: (
       <div className="border-2 border-blue-400 rounded-lg p-4">
-        <ExcelUploader></ExcelUploader>
+        <div>
+          <ExcelUploader/>
+        </div>
+        <div>
+          <Organizaciones/>
+        </div>
       </div>
     ),
   },
