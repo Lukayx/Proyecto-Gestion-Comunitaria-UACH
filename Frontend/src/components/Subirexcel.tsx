@@ -2,8 +2,7 @@ import { FunctionComponent } from 'react';
 import readXlsxFile from 'read-excel-file';
 import Swal from 'sweetalert2';
 
-const Subirexcel : FunctionComponent = () => {
-  
+const Subirexcel : FunctionComponent = () => {  
   const onMakeFile = () => {
     const input = document.createElement("input");
     input.type = "file";
@@ -12,7 +11,7 @@ const Subirexcel : FunctionComponent = () => {
     input.onchange = onReadExcel;
     input.click();
   };
-
+  
   const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
   const onReadExcel = async (event) => {
@@ -39,7 +38,7 @@ const Subirexcel : FunctionComponent = () => {
     await rows.shift();
     const values = rows.map((element) => {
       return {
-        numeroOrg: element[0],
+        numOrg: element[0],
         nombreOrg: element[1],
         rut: element[2],
         origen: element[3],
@@ -53,6 +52,21 @@ const Subirexcel : FunctionComponent = () => {
         estado: element[11],
       };
     });
+    
+    fetch('http://localhost:3007/api/organizaciones', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(values),
+    })
+      .then(response => response.json())
+      .then(data => {
+        console.log(data); // Aquí puedes manejar la respuesta del servidor
+      })
+      .catch(error => {
+        console.error('Error al realizar la solicitud:', error);
+      });
 
     Swal.update({
       html: `Se han encontrado un total de ${values.length} filas..... SE INGRESARÁN A BASE DE DATOS, NO RECARGUE LA PÁGINA.`,
@@ -60,26 +74,22 @@ const Subirexcel : FunctionComponent = () => {
 
     console.log(values);
 
-    await sleep(1000);
+    await sleep(2000);
     for (let index = 0; index < values.length; index++) {
       const element = values[index];
       Swal.update({
         html: `Agregando organización ${element.nombreOrg}.....`,
       });
 
-      await sleep(500);
+      await sleep(1000);
     }
-
-    const jsonValues = JSON.stringify(values);
-    console.log(jsonValues);
-
     Swal.update({
       html: `COMPLETADO.`,
     });
     await sleep(1000);
     Swal.close();
   };
-
+  
   return (
     <div>
       <button type="button" onClick={onMakeFile} >
