@@ -15,15 +15,15 @@ CREATE TABLE organizaciones (
   estado VARCHAR(20) NOT NULL
 );
 
-CREATE TABLE vecinos (
-  numero
-  nombre 
-  edad
-  estadoCivil
-  fechaIngreso
-  profesion
-  domicilio
-  carnet
-  observaciones TEXT
-  vecino
-);
+-- CREATE TABLE vecinos (
+--   numero
+--   nombre
+--   edad
+--   estadoCivil
+--   fechaIngreso
+--   profesion
+--   domicilio
+--   carnet
+--   observaciones TEXT,
+--   vecino
+-- );

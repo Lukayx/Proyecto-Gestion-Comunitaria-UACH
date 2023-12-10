@@ -1,11 +1,12 @@
 import { Request, Response } from 'express';
 import { Connection } from 'mysql2/promise';
 import { connect } from '../database';
-import { Organizacion } from '../Models/Organizacion';
+import { Organizations } from '../Models/Organizations';
+import { Organization } from '../Interfaces/Organization';
 
 export async function uploadOrganizations(req: Request, res: Response) {
   try {
-    const organizaciones = req.body;
+    const organizaciones: Organization[] = req.body;
     // Intenta conectar a la base de datos
     let conn: Connection;
     try {
@@ -15,28 +16,15 @@ export async function uploadOrganizations(req: Request, res: Response) {
       return; // Detiene la ejecución si no se pudo conectar a la base de datos
     }
     // Procesa cada organización
-    for (const organizacion of organizaciones) {
-      let elemento: Organizacion = new Organizacion(
-        organizacion.numeroOrg,
-        organizacion.nombreOrg,
-        organizacion.rut,
-        organizacion.origen,  
-        organizacion.comuna,
-        organizacion.region,
-        organizacion.direccion,
-        organizacion.tipo,
-        organizacion.fechaConceso,
-        organizacion.fechaRecepcion,
-        organizacion.clasificacion,
-        organizacion.estado
-      );
+    for (let i = 0; i < organizaciones.length; i++) {
+      let elemento: Organizations = new Organizations(organizaciones);
       // Verifica si es posible agregar la organización
-      if (elemento.isAddable()) {
+      if (elemento.isAddable(i)) {
         try {
           // Verifica si ya existe una organización con el mismo numOrg
           const [rows] = await conn.execute(
             'SELECT 1 FROM organizaciones WHERE numOrg = ? LIMIT 1',
-            [elemento.numOrg]
+            [organizaciones[i].numOrg]
           );
           // Verificar si se encontraron filas
           if (Array.isArray(rows) && rows.length === 0) {
@@ -44,22 +32,22 @@ export async function uploadOrganizations(req: Request, res: Response) {
             await conn.execute(
               `INSERT INTO organizaciones (numOrg, nombreOrg, rut, origen, comuna, region, direccion, tipo, fechaConceso, fechaRecepcion, clasificacion, estado) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
               [
-                elemento.numOrg,
-                elemento.nombreOrg,
-                elemento.rut,
-                elemento.origen,
-                elemento.comuna,
-                elemento.region,
-                elemento.direccion,
-                elemento.tipo,
-                elemento.fechaConceso,
-                elemento.fechaRecepcion,
-                elemento.clasificacion,
-                elemento.estado,
+                organizaciones[i].numOrg,
+                organizaciones[i].nombreOrg,
+                organizaciones[i].rut,
+                organizaciones[i].origen,
+                organizaciones[i].comuna,
+                organizaciones[i].region,
+                organizaciones[i].direccion,
+                organizaciones[i].tipo,
+                organizaciones[i].fechaConceso,
+                organizaciones[i].fechaRecepcion,
+                organizaciones[i].clasificacion,
+                organizaciones[i].estado,
               ]
             );
           } else {
-            console.log('El numOrg:', elemento.numOrg, 'ya existe en la tabla.');
+            console.log('El numOrg:', elemento.organizaciones[i].numOrg, 'ya existe en la tabla.');
           }
         } catch (error) {
           console.error('Error al intentar agregar la organización:', error);
@@ -88,6 +76,16 @@ export async function getNameOrganizations(req: Request, res: Response) {
   
   // Realiza una consulta SELECT para obtener los datos
   const [rows] = await conn.execute('SELECT nombreOrg FROM organizaciones');
-  res.status(200).json(rows);
-  console.log(rows);
+  return res.status(200).json({ ok: 'Success', data: rows});
+}
+
+export async function uploadOrganization(req: Request, res:Response) {
+  let conn: Connection;
+  try {
+    conn = await connect();
+  } catch (error) {
+    res.status(500).json('Error al intentar conectarse con la base de datos');
+    return;
+  }
+
 }
