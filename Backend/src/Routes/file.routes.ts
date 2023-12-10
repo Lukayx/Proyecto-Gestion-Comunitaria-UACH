@@ -3,10 +3,10 @@ const router = Router();
 
 import { createOrganization, verOrganization } from '../Controllers/fileController'
 
-router.route('/organizaciones/')
+router.route('/api/organizaciones')
   .post(createOrganization);
 
-router.route('/organizaciones/')
+router.route('/api/organizaciones')
   .get(verOrganization);
 
 export default router;

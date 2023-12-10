@@ -53,7 +53,8 @@ const Subirexcel : FunctionComponent = () => {
         estado: element[11],
       };
     });
-    fetch('http://localhost:3007/organizaciones', {
+    
+    fetch('http://localhost:3007/api/organizaciones', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

@@ -19,6 +19,7 @@ export class App {
 
   middlewares() {
     this.app.use(cors());  // CORS permite realizar solicitudes desde un dominio diferente al del servidor.
+    this.app.use(express.json());
   }
 
   routes() {
