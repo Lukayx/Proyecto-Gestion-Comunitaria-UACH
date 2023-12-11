@@ -2,12 +2,8 @@ import { useState } from 'react';
 import { FunctionComponent } from "react";
 import CardsOrg from './Organizaciones_lista/CardsOrg';
 
-interface Org {
-  nombreOrg: string;
-}
-
 const Organizaciones: FunctionComponent = () => {
-  const [organizaciones, setOrganizaciones] = useState<Org[]>([]);
+  const [organizaciones, setOrganizaciones] = useState([]);
 
   const fetchOrganizaciones = () => {
     fetch('http://localhost:3007/api/organizaciones', {
@@ -18,8 +14,12 @@ const Organizaciones: FunctionComponent = () => {
       })
       .then(response => response.json())
       .then(data => {
-        console.log(data);
-        setOrganizaciones(data);
+        if (data.ok === 'Success' && Array.isArray(data.data)) {
+          setOrganizaciones(data.data);
+          console.log(organizaciones);
+        } else {
+          console.error('Los datos recibidos no tienen la estructura esperada:', data);
+        }
       })
       .catch(error => {
         console.error('Error al realizar la solicitud:', error);
