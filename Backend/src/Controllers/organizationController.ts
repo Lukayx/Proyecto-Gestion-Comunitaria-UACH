@@ -66,7 +66,6 @@ export async function getNameOrganizations(req: Request, res: Response) {
     res.status(500).json({ mensaje: 'Error en el servidor' });
     return; // Detiene la ejecución si no se pudo conectar a la base de datos
   }
-  
   // Realiza una consulta SELECT para obtener los datos
   const [rows] = await conn.execute('SELECT nombreOrg FROM organizaciones');
   return res.status(200).json({ ok: 'Success', data: rows});
@@ -80,5 +79,4 @@ export async function uploadOrganization(req: Request, res:Response) {
     res.status(500).json('Error al intentar conectarse con la base de datos');
     return;
   }
-
 }

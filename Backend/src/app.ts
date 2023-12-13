@@ -7,7 +7,7 @@ const cors = require('cors');
 export class App {
   private app: Application;
 
-  constructor(private port?: number | string) {
+  constructor(private port?: number | string, private ip?: number | string) {
     this.app = express();
     this.settings();
     this.middlewares();  // Cambié el nombre a middlewares
@@ -16,6 +16,7 @@ export class App {
 
   settings() {
     this.app.set('port', this.port || process.env.PORT || 3007);
+    this.app.set('ip', this.ip || process.env.IP || 'localhost');
   }
 
   middlewares() {
@@ -30,7 +31,7 @@ export class App {
   }
 
   async listen() {
-    await this.app.listen(this.app.get('port'));
+    await this.app.listen(this.app.get('port'), this.app.get('ip'));
     console.log('Server on port', this.app.get('port'));
   }
 }

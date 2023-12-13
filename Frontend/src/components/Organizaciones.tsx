@@ -6,7 +6,7 @@ const Organizaciones: FunctionComponent = () => {
   const [organizaciones, setOrganizaciones] = useState([]);
 
   const fetchOrganizaciones = () => {
-    fetch('http://localhost:3007/api/organizaciones', {
+    fetch(`${import.meta.env.VITE_BACKEND_URL3}/organizaciones`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',

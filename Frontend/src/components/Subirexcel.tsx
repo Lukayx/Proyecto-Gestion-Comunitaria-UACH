@@ -54,7 +54,7 @@ const Subirexcel : FunctionComponent = () => {
       };
     });
     
-    fetch('http://localhost:3007/api/organizaciones', {
+    fetch(`${import.meta.env.VITE_BACKEND_URL3}/organizaciones`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -75,19 +75,19 @@ const Subirexcel : FunctionComponent = () => {
 
     console.log(values);
 
-    await sleep(2000);
+    await sleep(500);
     for (let index = 0; index < values.length; index++) {
       const element = values[index];
       Swal.update({
         html: `Agregando organización ${element.nombreOrg}.....`,
       });
 
-      await sleep(1000);
+      await sleep(500);
     }
     Swal.update({
       html: `COMPLETADO.`,
     });
-    await sleep(1000);
+    await sleep(500);
     Swal.close();
 
   };
