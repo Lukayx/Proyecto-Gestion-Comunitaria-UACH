@@ -15,7 +15,7 @@ export class App {
   }
 
   settings() {
-    this.app.set('port', this.port || process.env.PORT || 3007);
+    this.app.set('port', this.port || process.env.PORT || 3008);
     this.app.set('ip', this.ip || process.env.IP || 'localhost');
   }
 
