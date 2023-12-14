@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from 'react';
+import { FunctionComponent } from 'react';
 
 const Novedades: FunctionComponent<{ title: string; content: string }> = ({ title, content }) => {
   return (
