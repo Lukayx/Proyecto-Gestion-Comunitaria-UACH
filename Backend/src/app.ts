@@ -1,7 +1,7 @@
 import express, { Application } from 'express';
 import IndexRoutes from './Routes/index.routes';
 import FileRoutes from './Routes/organization.routes';
-import {vecinosRoutes} from './Routes/vecinos.routes';
+// import {vecinosRoutes} from './Routes/vecinos.routes';
 const cors = require('cors');
 
 export class App {
@@ -26,7 +26,7 @@ export class App {
   routes() {
     this.app.use(IndexRoutes);
     this.app.use(FileRoutes);
-    this.app.use(vecinosRoutes);
+    // this.app.use(vecinosRoutes);
   }
 
   async listen() {
