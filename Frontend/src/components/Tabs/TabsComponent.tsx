@@ -1,13 +1,23 @@
-"use client";
-import { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, ReactElement } from "react";
 
+interface TabItem {
+  icon: ReactElement;
+  title: string;
+  content: ReactElement;
+}
 
-const TabsComponent = ({ items }) => {
+interface TabsComponentProps {
+  items: TabItem[];
+}
+
+const TabsComponent: React.FC<TabsComponentProps> = ({ items }) => {
   const [selectedTab, setSelectedTab] = useState(0);
-  const firstBtnRef = useRef();
+  const firstBtnRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
-    firstBtnRef.current.focus();
+    if (firstBtnRef && firstBtnRef.current) {
+      firstBtnRef.current.focus();
+    }
   }, []);
 
   return (
@@ -23,7 +33,7 @@ const TabsComponent = ({ items }) => {
                 selectedTab === index ? "ring-2 bg-white text-blue-600" : ""
               } `}
             >
-							{item.icon}
+              {item.icon}
               {item.title}
             </button>
           ))}

@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useState } from 'react';
+import { FunctionComponent, useState } from 'react';
 
 
 interface MensajeProps {
@@ -9,7 +9,7 @@ interface MensajeProps {
 }
 
 
-const Mensaje: FunctionComponent<MensajeProps> = ({ id, autor, contenido, respuestas }) => {
+const Mensaje: FunctionComponent<MensajeProps> = ({ autor, contenido, respuestas }) => {
   const [mostrarRespuestas, setMostrarRespuestas] = useState(false);
 
   return (
